@@ -22,8 +22,10 @@ class EmployeeAdapter(private var empList: ArrayList<UserModel>): RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentEmp = empList[position]
         holder.name.text = currentEmp.Name
-        holder.total.text = currentEmp.Total.toString()
-        holder.left.text = currentEmp.Left.toString()
+        holder.total.text = "Total Amount: " + currentEmp.Total.toString()
+        holder.left.text = "Amount Left: " + currentEmp.Left.toString()
+        holder.expenseDesc.text = currentEmp.ExpenseDescription
+        holder.expenseAmt.text = currentEmp.ExpenseAmount.toString()
 
         holder.btnEdit.setOnClickListener {
             onItemClick?.invoke(currentEmp)
@@ -39,6 +41,8 @@ class EmployeeAdapter(private var empList: ArrayList<UserModel>): RecyclerView.A
         val total: TextView = itemView.findViewById(R.id.tvTotalAmt)
         val left: TextView = itemView.findViewById(R.id.tvLeftAmt)
         val btnEdit: ImageView = itemView.findViewById(R.id.btnEdit)
+        val expenseDesc: TextView = itemView.findViewById(R.id.tvLastDesc)
+        val expenseAmt: TextView = itemView.findViewById(R.id.tvLastAmt)
     }
 
 }

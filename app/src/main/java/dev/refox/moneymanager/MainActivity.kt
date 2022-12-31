@@ -18,6 +18,7 @@ import dev.refox.moneymanager.model.UserModel
 private lateinit var binding: ActivityMainBinding
 private lateinit var empList: ArrayList<UserModel>
 private lateinit var database: DatabaseReference
+private lateinit var databaseTwo: DatabaseReference
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvEmployeesList.setHasFixedSize(true)
 
         database = FirebaseDatabase.getInstance().getReference("employees")
+
 
         empList = arrayListOf<UserModel>()
         val employeeAdapter = EmployeeAdapter(empList)
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
         employeeAdapter.onItemClick = {
             val dialogBinding = layoutInflater.inflate(R.layout.edit_dialog_layout, null)
             val dialog = Dialog(this)
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
             btnEnter.setOnClickListener {
                 database.child(email).child("Total").setValue(etTotalAmt.text.toString().toInt())
+                database.child(email).child("Left").setValue(etTotalAmt.text.toString().toInt())
                 dialog.dismiss()
             }
         }
