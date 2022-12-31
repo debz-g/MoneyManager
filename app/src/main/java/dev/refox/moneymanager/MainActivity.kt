@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
@@ -18,7 +19,6 @@ import dev.refox.moneymanager.model.UserModel
 private lateinit var binding: ActivityMainBinding
 private lateinit var empList: ArrayList<UserModel>
 private lateinit var database: DatabaseReference
-private lateinit var databaseTwo: DatabaseReference
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvEmployeesList.layoutManager = LinearLayoutManager(this)
         binding.rvEmployeesList.setHasFixedSize(true)
+        binding.tvNoUsers.visibility = View.VISIBLE
+        binding.rvEmployeesList.visibility = View.INVISIBLE
 
         database = FirebaseDatabase.getInstance().getReference("employees")
 
@@ -43,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                         val empData = empSnap.getValue(UserModel::class.java)
                         empList.add(empData!!)
                     }
+                    binding.tvNoUsers.visibility = View.GONE
+                    binding.rvEmployeesList.visibility = View.VISIBLE
                     binding.rvEmployeesList.adapter = employeeAdapter
                 }
             }
