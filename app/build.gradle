@@ -89,4 +89,9 @@ dependencies {
     //Coroutines
     implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3')
     implementation 'com.razorpay:checkout:1.6.19'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
 }
