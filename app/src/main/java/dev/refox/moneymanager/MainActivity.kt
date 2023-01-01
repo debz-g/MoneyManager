@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.setStatusBarColor(this.getResources().getColor(R.color.material_blue))
 
         binding.rvEmployeesList.layoutManager = LinearLayoutManager(this)
         binding.rvEmployeesList.setHasFixedSize(true)
