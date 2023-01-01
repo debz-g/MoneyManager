@@ -20,12 +20,16 @@ private lateinit var binding: ActivityMainBinding
 private lateinit var empList: ArrayList<UserModel>
 private lateinit var database: DatabaseReference
 
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.setStatusBarColor(this.getResources().getColor(R.color.material_blue))
+
+        var total = 0
+        var left = 0
 
         binding.rvEmployeesList.layoutManager = LinearLayoutManager(this)
         binding.rvEmployeesList.setHasFixedSize(true)
@@ -74,14 +78,30 @@ class MainActivity : AppCompatActivity() {
             var email: String = it.Email.toString()
 
             btnEnter.setOnClickListener {
-                database.child(email).child("Total").setValue(etTotalAmt.text.toString().toInt())
-                database.child(email).child("Left").setValue(etTotalAmt.text.toString().toInt())
+
+
+                database.child(email).child("Left").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            val leftAmt = snapshot.getValue(Int::class.java)
+                            left = leftAmt!!
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+
+                total = total + etTotalAmt.text.toString().toInt()
+                left = left + etTotalAmt.text.toString().toInt()
+
+                database.child(email).child("Total").setValue(total)
+                database.child(email).child("Left").setValue(left)
                 dialog.dismiss()
             }
         }
     }
-
-
 
 
 }

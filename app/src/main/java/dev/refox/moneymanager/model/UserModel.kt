@@ -7,5 +7,5 @@ data class UserModel(
     val Email: String? = null,
     val ExpenseDescription: String? = null,
     val ExpenseAmount: Int? = null,
-    val ProfilePic: String? = null
+    val imageUrl: String? = null
 )

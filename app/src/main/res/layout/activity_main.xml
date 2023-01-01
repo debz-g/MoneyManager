@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tvBackground"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/material_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +30,11 @@
             android:id="@+id/tvPlaceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:fontFamily="@font/sofiaprosoftbold"
             android:text="Employees' List"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
