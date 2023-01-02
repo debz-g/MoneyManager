@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance().getReference("employees")
 
-
         empList = arrayListOf<UserModel>()
         employeeAdapter = EmployeeAdapter(empList)
 
