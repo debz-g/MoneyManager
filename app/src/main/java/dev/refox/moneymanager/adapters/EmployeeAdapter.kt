@@ -21,13 +21,18 @@ class EmployeeAdapter(private var empList: ArrayList<UserModel>): RecyclerView.A
         return ViewHolder(itemView)
     }
 
+    fun setFilteredList(empList: ArrayList<UserModel>){
+        this.empList = empList
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentEmp = empList[position]
         holder.name.text = currentEmp.Name
-        holder.total.text = "Total Amount: " + currentEmp.Total.toString()
-        holder.left.text = "Amount Left: " + currentEmp.Left.toString()
+        holder.total.text = "Total Amount: ₹" + currentEmp.Total.toString()
+        holder.left.text = "Amount Left: ₹" + currentEmp.Left.toString()
         holder.expenseDesc.text = currentEmp.ExpenseDescription
-        holder.expenseAmt.text = currentEmp.ExpenseAmount.toString()
+        holder.expenseAmt.text = "₹"+currentEmp.ExpenseAmount.toString()
         holder.email.text = DecodeString(currentEmp.Email)
         Picasso.get().load(currentEmp.imageUrl).into(holder.imageView)
 

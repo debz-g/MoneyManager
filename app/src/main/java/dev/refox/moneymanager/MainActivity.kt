@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.*
@@ -15,10 +17,13 @@ import com.google.firebase.ktx.Firebase
 import dev.refox.moneymanager.adapters.EmployeeAdapter
 import dev.refox.moneymanager.databinding.ActivityMainBinding
 import dev.refox.moneymanager.model.UserModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var empList: ArrayList<UserModel>
 private lateinit var database: DatabaseReference
+private lateinit var employeeAdapter: EmployeeAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
 
         empList = arrayListOf<UserModel>()
-        val employeeAdapter = EmployeeAdapter(empList)
+        employeeAdapter = EmployeeAdapter(empList)
 
         database.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -58,6 +63,19 @@ class MainActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
 
+            }
+
+        })
+
+        binding.svSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
             }
 
         })
@@ -99,6 +117,23 @@ class MainActivity : AppCompatActivity() {
                 database.child(email).child("Total").setValue(total)
                 database.child(email).child("Left").setValue(left)
                 dialog.dismiss()
+            }
+        }
+    }
+
+    private fun filterList(query: String?) {
+        if(query!=null){
+            val filteredList = ArrayList<UserModel>()
+            for(i in empList){
+                if(i.Name?.toLowerCase(Locale.ROOT)!!.contains(query)){
+                    filteredList.add(i)
+                }
+            }
+
+            if(filteredList.isEmpty()){
+                Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show()
+            } else {
+                employeeAdapter.setFilteredList(filteredList)
             }
         }
     }

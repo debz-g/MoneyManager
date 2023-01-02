@@ -16,7 +16,7 @@
            android:id="@+id/profilePicImage"
            android:layout_width="110dp"
            android:layout_height="110dp"
-           android:src="@drawable/profile_placeholder"
+           android:src="@drawable/galleryplaceholder"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintBottom_toTopOf="@id/materialCardView"
@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sofiaprosoftbold"
                 android:text="Debayan Ghosh"
+                android:maxWidth="200dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
