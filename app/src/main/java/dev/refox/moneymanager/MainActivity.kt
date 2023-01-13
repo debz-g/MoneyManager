@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("employees")
 
         empList = arrayListOf<UserModel>()
-        employeeAdapter = EmployeeAdapter(empList)
+        employeeAdapter = EmployeeAdapter(this,empList)
 
         database.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

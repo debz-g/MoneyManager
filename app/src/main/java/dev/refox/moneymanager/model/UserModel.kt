@@ -5,7 +5,6 @@ data class UserModel(
     val Total: Int? = null,
     val Left: Int? = null,
     val Email: String? = null,
-    val ExpenseDescription: String? = null,
-    val ExpenseAmount: Int? = null,
-    val imageUrl: String? = null
+    val imageUrl: String? = null,
+    val Outlet: String?=null,
 )
